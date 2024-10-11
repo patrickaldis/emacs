@@ -17,7 +17,7 @@
 
   (global-definer
     "k" 'lsp-ui-doc-glance
-    ":" 'counsel-M-x
+    ":" 'execute-extended-command
    )
     (defmacro general-global-menu-definer (def infix-key &rest body)
     "Create a definer named general-global-DEF wrapping global-definer.
@@ -40,7 +40,7 @@
 
     (general-global-menu-definer
      "buffer" "b"
-        "b" 'counsel-switch-buffer
+        "b" 'switch-to-buffer
         "e" 'eval-buffer
      )
 
@@ -63,9 +63,9 @@
 
     (general-global-menu-definer
      "help" "h"
-        "v" 'counsel-describe-variable
-        "s" 'counsel-describe-symbol
-        "f" 'counsel-describe-function
+        "v" 'describe-variable
+        "s" 'describe-symbol
+        "f" 'describe-function
         "k" 'describe-key
         "e" 'info-emacs-manual
         "m" 'info-emacs-manual
@@ -73,8 +73,14 @@
 
     (general-global-menu-definer
      "file" "f"
-        "r" 'counsel-recentf
-        "f" 'counsel-find-file
+        "r" 'recentf
+        "f" 'find-file
+     )
+
+    (general-global-menu-definer
+     "projectile" "p"
+        "p" 'project-switch-project
+        "f" 'project-find-file
      )
 
   (general-define-key
