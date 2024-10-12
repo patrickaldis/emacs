@@ -1,0 +1,7 @@
+*
+!init.el
+!config/
+!config/**
+!straight/
+!straight/versions/
+!straight/versions/**
