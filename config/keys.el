@@ -94,7 +94,6 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
-  :after haskell-mode
   :config
   (evil-mode 1)
   (evil-global-set-key 'visual "gc" 'comment-or-uncomment-region)

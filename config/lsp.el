@@ -1,10 +1,7 @@
 (use-package lsp-mode
   :commands lsp
   :config
-  (add-hook 'haskell-mode-hook #'lsp-deferred)
   (add-hook 'nix-mode-hook #'lsp-deferred)
-  (add-hook 'haskell-literate-mode-hook #'lsp-deferred)
-  (setq lsp-haskell-server-path "haskell-language-server")
   (setq gc-cons-threshold 1000000000)
   (setq read-process-output-max (* 1024 1024))
     (lsp-register-client
@@ -19,6 +16,15 @@
 (use-package lsp-ivy)
 
 ;;; LANGUAGE PACKAGES
-(use-package lsp-haskell)
 (use-package nix-mode :config (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode)))
 (use-package fish-mode)
+;; (use-package web-mode
+;;   :config
+;;   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+(use-package haskell-ts-mode
+  :config
+   (add-to-list 'auto-mode-alist '("\.hs" . haskell-ts-mode))
+  )
+(add-to-list 'auto-mode-alist '("\.rs" . rust-ts-mode))
+(add-to-list 'auto-mode-alist '("\.html" . html-ts-mode))
+(straight-use-package '(evil-ts :type git :host github :repo "foxfriday/evil-ts"))

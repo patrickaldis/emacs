@@ -54,6 +54,7 @@
   (completion-category-overrides
    '((file (styles basic ; For `tramp' hostname completion with `vertico'
                    orderless)))))
+(use-package consult)
 
 
 ;;; DIRENV
