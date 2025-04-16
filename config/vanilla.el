@@ -1,7 +1,7 @@
 ;; BACKUPS
 (setq
-    backup-directory-alist '(("." . "~/.emacs.d/backup"))
-    auto-save-file-name-transforms `((".*" "~/.emacs.d/auto-saves/" t))
+    backup-directory-alist '(("." . "~/.emacs.d/backup/"))
+    auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-saves/" t))
     backup-by-copying t    ; Don't delink hardlinks
     version-control t      ; Use version numbers on backups
     delete-old-versions t  ; Automatically delete excess backups
