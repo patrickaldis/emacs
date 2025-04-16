@@ -21,6 +21,8 @@
     "e" 'consult-flymake
     "s" 'consult-eglot-symbols
     "r" 'consult-ripgrep
+    "a" 'eglot-code-actions
+    "SPC" 'consult-project-extra-find
    )
     (defmacro general-global-menu-definer (def infix-key &rest body)
     "Create a definer named general-global-DEF wrapping global-definer.
