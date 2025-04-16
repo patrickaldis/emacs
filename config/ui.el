@@ -1,5 +1,5 @@
 ;; FONT
-(setq default-frame-alist '((font . "JetBrainsMono Nerd Font Mono 12")))
+(setq default-frame-alist '((font . "JetBrainsMono NF 12")))
 
 ;; SCROLLING
 (pixel-scroll-precision-mode 0)
@@ -26,7 +26,9 @@
 
 ;;; ENABLE NERD ICONS
 (use-package nerd-icons
-  :init (setq nerd-icons-color-icons t))
+  :config
+  (setq nerd-icons-color-icons t)
+  (setq nerd-icons-font-family "JetBrainsMono NF"))
 
 ;;; DASHBOARD
 (use-package dashboard
@@ -34,6 +36,8 @@
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 
+  (setq dashboard-items '((projects . 5) (recents . 5)))
+  (setq dashboard-projects-backend 'project-el)
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-display-icons-p t)
   (setq dashboard-icon-type 'nerd-icons)

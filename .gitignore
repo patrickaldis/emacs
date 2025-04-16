@@ -1,7 +1,10 @@
-*
-!init.el
-!config/
-!config/**
-!straight/
-!straight/versions/
-!straight/versions/**
+auto-save-list
+eln-cache
+eshell
+straight/build
+straight/repos
+straight/build-cache.el
+transient
+projects
+recentf
+.lsp-session-v1

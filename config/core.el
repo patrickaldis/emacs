@@ -55,6 +55,8 @@
    '((file (styles basic ; For `tramp' hostname completion with `vertico'
                    orderless)))))
 (use-package consult)
+(use-package consult-project-extra :after consult)
+(use-package consult-eglot :after consult eglot)
 
 
 ;;; DIRENV

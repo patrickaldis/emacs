@@ -16,8 +16,11 @@
     :non-normal-prefix "C-SPC")
 
   (global-definer
-    "k" 'lsp-ui-doc-glance
+    "k" 'eldoc-box-help-at-point
     ":" 'execute-extended-command
+    "e" 'consult-flymake
+    "s" 'consult-eglot-symbols
+    "r" 'consult-ripgrep
    )
     (defmacro general-global-menu-definer (def infix-key &rest body)
     "Create a definer named general-global-DEF wrapping global-definer.
@@ -78,8 +81,8 @@
      )
 
     (general-global-menu-definer
-     "projectile" "p"
-        "p" 'project-switch-project
+     "project" "p"
+        "p" 'consult-project-extra-find
         "f" 'project-find-file
      )
 
