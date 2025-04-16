@@ -82,7 +82,7 @@
 
     (general-global-menu-definer
      "project" "p"
-        "p" 'consult-project-extra-find
+        "p" 'project-switch-project
         "f" 'project-find-file
      )
 

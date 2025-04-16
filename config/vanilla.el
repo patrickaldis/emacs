@@ -13,5 +13,5 @@
 (add-hook 'text-mode-hook 'display-line-numbers-mode) ;; DISPLAY LINE NOS
 (add-hook 'prog-mode-hook 'display-line-numbers-mode) ;; DISPLAY LINE NOS
 
-;; ;;; PROJECT OPTIONS
-;; (setq project-switch-commands #'project-find-file)
+;;; PROJECT OPTIONS
+(setq project-switch-commands #'project-find-file)
