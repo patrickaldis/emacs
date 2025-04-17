@@ -57,6 +57,7 @@
 (use-package consult)
 (use-package consult-project-extra :after consult)
 (use-package consult-eglot :after consult eglot)
+(use-package consult-hoogle :after consult)
 
 
 ;;; DIRENV

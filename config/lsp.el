@@ -16,6 +16,23 @@
 ;; (use-package lsp-ivy)
 ;; (use-package lsp-haskell
 ;;   :config (setq lsp-haskell-server-path "haskell-language-server"))
+(defun my/eldoc-box-show-doc-at-point (event)
+  "Show eldoc-box help at point after a short delay to give Eldoc time to update."
+  (interactive "e")
+  (mouse-set-point event)
+  (eldoc-box-reset-frame)
+  (run-with-timer
+   0.05 nil
+   (lambda ()
+     (eldoc-box-help-at-point))))
+
+
+(defun my/eldoc-box-refresh (event)
+  "Always refresh eldoc box popup at point on mouse click."
+  (interactive "e")
+  (mouse-set-point event)
+  (eldoc-box-reset-frame) ;; remove any existing popup
+  (eldoc-box-help-at-point)) ;; show new popup
 
 ;; eglot
 (with-eval-after-load 'eglot
@@ -25,11 +42,12 @@
     (add-to-list 'eglot-server-programs
 		'(nix-mode . ("nixd"))))
 (with-eval-after-load 'eglot
-  (define-key eglot-mode-map [mouse-1] #'eldoc-box-help-at-point))
+  (define-key eglot-mode-map [mouse-1] #'my/eldoc-box-show-doc-at-point))
+
 
 (use-package eldoc-box
   :custom
-  (eldoc-idle-delay 0.2))
+  (eldoc-idle-delay 0.05))
 (add-hook 'haskell-mode-hook 'eglot-ensure)
 (add-hook 'nix-mode-hook 'eglot-ensure)
 

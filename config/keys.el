@@ -79,7 +79,7 @@
     (general-global-menu-definer
      "file" "f"
         "r" 'recentf
-        "f" 'find-file
+        "f" 'project-root-find-file
      )
 
     (general-global-menu-definer
