@@ -15,11 +15,21 @@
 (setq-default indent-tabs-mode nil) ;; Use spaces instead of tabs
 
 ;;; WHITESPACE
-;; (add-hook 'prog-mode-hook #'whitespace-mode)
-;; (setq whitespace-style '(face space-mark tab-mark))
-;; (custom-set-faces
-;;  '(whitespace-space-mark
-;;    ((t (:foreground "#555555")))))
+(add-hook 'prog-mode-hook #'whitespace-mode)
+(setq whitespace-style '(face space-mark tab-mark))
+
+(defvar my-space-re "\\( +\\)" "regexp to match space")
+(defvar my-tab-re "\\(\11+\\)" "regexp to match tab")
+
+(defun foo ()
+  "..."
+  (font-lock-add-keywords
+   nil
+   `((,my-space-re (1 'whitespace-space t))
+     (,my-tab-re (1 'whitespace-space t)))               ; indenting spaces
+   'APPEND))
+
+(add-hook 'whitespace-mode-hook 'foo)
 
 ;; HIDE UI
 (tool-bar-mode -1)
@@ -30,8 +40,6 @@
 ;;; THEME
 (use-package catppuccin-theme
   :init
-  (add-hook 'prog-mode-hook #'whitespace-mode)
-  (setq whitespace-style '(face space-mark tab-mark))
   (load-theme 'catppuccin :noconfirm)
   (setq catppuccin-flavor 'frappe)
   (catppuccin-reload)
