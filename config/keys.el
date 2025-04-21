@@ -9,11 +9,27 @@
                                   operator
                                   replace))
   :config
+
+(general-define-key
+ :keymaps 'global
+ :states '(insert emacs normal hybrid motion visual operator)
+ "SPC" nil)  ;; explicitly reserve SPC as a prefix
+
   (general-create-definer global-definer
     :keymaps 'override
     :states '(insert emacs normal hybrid motion visual operator)
     :prefix "SPC"
     :non-normal-prefix "C-SPC")
+
+ (general-create-definer weak-definer
+   :keymaps 'global
+   :states '(insert emacs normal hybrid motion visual operator)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC")
+
+ (weak-definer
+   "a" 'eglot-code-actions
+ )
 
   (global-definer
     "k" 'eldoc-box-help-at-point
@@ -21,8 +37,8 @@
     "e" 'consult-flymake
     "s" 'consult-eglot-symbols
     "r" 'consult-ripgrep
-    "a" 'eglot-code-actions
     "SPC" 'consult-project-extra-find
+    "?" 'describe-mode
    )
     (defmacro general-global-menu-definer (def infix-key &rest body)
     "Create a definer named general-global-DEF wrapping global-definer.
@@ -79,7 +95,7 @@
     (general-global-menu-definer
      "file" "f"
         "r" 'recentf
-        "f" 'project-root-find-file
+        "f" 'find-file
      )
 
     (general-global-menu-definer

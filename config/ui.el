@@ -10,6 +10,17 @@
 (set-default 'truncate-lines 0) 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;;; TABS
+(setq-default tab-width 4)         ;; Set tab width to 4 spaces
+(setq-default indent-tabs-mode nil) ;; Use spaces instead of tabs
+
+;;; WHITESPACE
+;; (add-hook 'prog-mode-hook #'whitespace-mode)
+;; (setq whitespace-style '(face space-mark tab-mark))
+;; (custom-set-faces
+;;  '(whitespace-space-mark
+;;    ((t (:foreground "#555555")))))
+
 ;; HIDE UI
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -19,6 +30,8 @@
 ;;; THEME
 (use-package catppuccin-theme
   :init
+  (add-hook 'prog-mode-hook #'whitespace-mode)
+  (setq whitespace-style '(face space-mark tab-mark))
   (load-theme 'catppuccin :noconfirm)
   (setq catppuccin-flavor 'frappe)
   (catppuccin-reload)
@@ -29,6 +42,14 @@
   :config
   (setq nerd-icons-color-icons t)
   (setq nerd-icons-font-family "JetBrainsMono NF"))
+
+;;; DIRED
+(use-package nerd-icons-dired
+  :after nerd-icons
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+(use-package diredfl
+  :config (diredfl-global-mode))
 
 ;;; DASHBOARD
 (use-package dashboard

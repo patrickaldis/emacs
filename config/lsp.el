@@ -22,7 +22,7 @@
   (mouse-set-point event)
   (eldoc-box-reset-frame)
   (run-with-timer
-   0.05 nil
+   1 nil
    (lambda ()
      (eldoc-box-help-at-point))))
 
@@ -37,7 +37,7 @@
 ;; eglot
 (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs
-		'(haskell-mode . ("haskell-language-server" "--lsp"))))
+		'(haskell-ts-mode . ("haskell-language-server" "--lsp"))))
 (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs
 		'(nix-mode . ("nixd"))))
@@ -47,22 +47,54 @@
 
 (use-package eldoc-box
   :custom
-  (eldoc-idle-delay 0.05))
-(add-hook 'haskell-mode-hook 'eglot-ensure)
+  (eldoc-idle-delay 1))
+;; (add-hook 'haskell-mode-hook 'eglot-ensure)
+(add-hook 'haskell-ts-mode 'eglot-ensure)
 (add-hook 'nix-mode-hook 'eglot-ensure)
+(add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 
+;;; FLYSPELL
+(use-package flyspell-correct
+  :general
+  (:keymaps 'markdown-mode-map
+   :states 'normal
+	   "SPC a" 'flyspell-correct-at-point))
 
 ;;; LANGUAGE PACKAGES
 (use-package nix-mode :config (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode)))
 (use-package fish-mode)
-(use-package haskell-mode)
-(use-package markdown-mode)
-(use-package web-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+(use-package markdown-mode
+  :hook (markdown-mode . flyspell-mode))
+;; (use-package web-mode
+;;   :config
+;;   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+;; (use-package websocket)
+(use-package emmet-mode
+  :hook (tsx-ts-mode . emmet-mode))
+
+;; (use-package deno-bridge
+;;   :straight (:type git :host github :repo "manateelazycat/deno-bridge")
+;;   :init
+;;   (use-package websocket))
+
+;; (use-package emmet2-mode
+;;   :straight (:type git :host github :repo "p233/emmet2-mode" :files (:defaults "*.ts" "src" "data"))
+;;   :after deno-bridge
+;;   :hook ((html-ts-mode jsx-ts-mode css-mode) . emmet2-mode)                     ;; Enable emmet2-mode for web-mode and css-mode and other major modes based on them, such as the build-in scss-mode
+;;   :config                                                       ;; OPTIONAL
+;;   (unbind-key "C-j" emmet2-mode-map)                            ;; Unbind the default expand key
+;;   (define-key emmet2-mode-map (kbd "C-c C-.") 'emmet2-expand))  ;; Bind custom expand key
+
+;; 
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.html" . html-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 
 ;;; TREESITTER MODES
-;; (use-package haskell-ts-mode
+(use-package haskell-ts-mode)
+  ;; :straight (:host github :repo "https://codeberg.org/pranshu/haskell-ts-mode" :commit "cc6d458a3e67b04d30d0d1f2c8d105c1a66e2f01"))
 ;;   :config
 ;;    (add-to-list 'auto-mode-alist '("\.hs" . haskell-ts-mode))
 ;;   )

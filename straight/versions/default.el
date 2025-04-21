@@ -22,7 +22,6 @@
  ("git-gutter-fringe" . "648cb5b57faec55711803cdc9434e55a733c3eba")
  ("gnu-elpa-mirror" . "b612d60157ce0e17d4698900871e8e6be249d66c")
  ("goto-chg" . "72f556524b88e9d30dc7fc5b0dc32078c166fda7")
- ("haskell-ts-mode" . "6cf94ac3a191ba46a8b288824ad4ed38c5d4d548")
  ("ht.el" . "1c49aad1c820c86f7ee35bf9fff8429502f60fef")
  ("hydra" . "317e1de33086637579a7aeb60f77ed0405bf359b")
  ("lsp-ivy" . "9ecf4dd9b1207109802bd1882aa621eb1c385106")
