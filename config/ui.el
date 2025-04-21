@@ -11,7 +11,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;; TABS
-(setq-default tab-width 4)         ;; Set tab width to 4 spaces
+(setq-default tab-width 2)         ;; Set tab width to 4 spaces
 (setq-default indent-tabs-mode nil) ;; Use spaces instead of tabs
 
 ;;; WHITESPACE

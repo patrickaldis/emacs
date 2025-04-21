@@ -22,7 +22,7 @@
   (mouse-set-point event)
   (eldoc-box-reset-frame)
   (run-with-timer
-   1 nil
+   0.2 nil
    (lambda ()
      (eldoc-box-help-at-point))))
 
@@ -47,9 +47,9 @@
 
 (use-package eldoc-box
   :custom
-  (eldoc-idle-delay 1))
+  (eldoc-idle-delay 0.2))
 ;; (add-hook 'haskell-mode-hook 'eglot-ensure)
-(add-hook 'haskell-ts-mode 'eglot-ensure)
+;; (add-hook 'haskell-ts-mode 'eglot-ensure)
 (add-hook 'nix-mode-hook 'eglot-ensure)
 (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
 (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
@@ -71,6 +71,7 @@
 ;;   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 ;; (use-package websocket)
 (use-package emmet-mode
+  :config (add-to-list 'emmet-jsx-major-modes 'tsx-ts-mode)
   :hook (tsx-ts-mode . emmet-mode))
 
 ;; (use-package deno-bridge
@@ -91,6 +92,8 @@
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.html" . html-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-ts-mode))
+(add-hook 'haskell-ts-mode-hook 'eglot-ensure)
 
 ;;; TREESITTER MODES
 (use-package haskell-ts-mode)
