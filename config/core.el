@@ -1,14 +1,47 @@
-;;; COMPANY
-(use-package company
-  :defines company-idle-delay
+;; ;;; COMPANY
+;; (use-package company
+;;   :defines company-idle-delay
 
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-idle-delay 0))
+;;   :init
+;;   (add-hook 'after-init-hook 'global-company-mode)
+;;   (setq company-idle-delay 0.2))
 
-(use-package company-posframe
-  :after company
-  :config (company-posframe-mode 1))
+;; (use-package company-posframe
+;;   :after company
+;;   :config (company-posframe-mode 1))
+(use-package corfu :config
+  (global-corfu-mode)
+  (setq corfu-auto        t
+        corfu-auto-delay  0  ;; TOO SMALL - NOT RECOMMENDED!
+        corfu-auto-prefix 0) ;; TOO SMALL - NOT RECOMMENDED!
+
+  (add-hook 'corfu-mode-hook
+            (lambda ()
+                ;; Settings only for Corfu
+                (setq-local completion-styles '(basic)
+                            completion-category-overrides nil
+                            completion-category-defaults nil)))
+  (use-package nerd-icons-corfu)
+    (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+
+    ;; Optionally:
+    (setq nerd-icons-corfu-mapping
+        '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+            (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+            ;; You can alternatively specify a function to perform the mapping,
+            ;; use this when knowing the exact completion candidate is important.
+            (file :fn nerd-icons-icon-for-file :face font-lock-string-face)
+            ;; ...
+            (t :style "cod" :icon "code" :face font-lock-warning-face)))
+            ;; Remember to add an entry for `t', the library uses that as default.
+
+    ;; The Custom interface is also supported for tuning the variable above.
+  )
+
+(use-package atomic-chrome
+  :config
+  (atomic-chrome-start-server)
+  (setq atomic-chrome-buffer-open-style 'frame))
 
 ;; ;;; IVY
 ;; (use-package counsel 
@@ -31,6 +64,9 @@
 ;;         ("C-j" . ivy-next-line)
 ;;         ("C-k" . ivy-previous-line))
 ;; )
+
+;; Terminal
+(setq term-default-shell "/run/current-system/sw/bin/fish") 
 
 ;; (use-package ivy-rich
 ;;     :after ivy

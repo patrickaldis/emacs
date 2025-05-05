@@ -36,7 +36,9 @@
     ":" 'execute-extended-command
     "e" 'consult-flymake
     "s" 'consult-eglot-symbols
-    "r" 'consult-ripgrep
+    "f" 'project-find-file
+    "o" 'find-file
+    "r" 'eglot-rename
     "SPC" 'consult-project-extra-find
     "?" 'describe-mode
    )
@@ -92,11 +94,12 @@
         "m" 'info-emacs-manual
      )
 
-    (general-global-menu-definer
-     "file" "f"
-        "r" 'recentf
-        "f" 'find-file
-     )
+    ;; (general-global-menu-definer
+    ;;  "file" "f"
+    ;;     "r" 'recentf
+    ;;     "f" 'find-file
+    ;;     "s" 'consult-ripgrep
+    ;;  )
 
     (general-global-menu-definer
      "project" "p"

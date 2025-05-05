@@ -42,7 +42,18 @@
     (add-to-list 'eglot-server-programs
 		'(nix-mode . ("nixd"))))
 (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+		'(tsx-ts-mode . ("yarn" "exec" "typescript-language-server" "--stdio"))))
+(with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+		'(jtsx-tsx-mode . ("yarn" "exec" "typescript-language-server" "--stdio"))))
+(with-eval-after-load 'eglot
   (define-key eglot-mode-map [mouse-1] #'my/eldoc-box-show-doc-at-point))
+
+;;; JTSX
+(use-package jtsx
+  :config
+  (setq jtsx-enable-jsx-element-tags-auto-sync t))
 
 
 (use-package eldoc-box
@@ -52,6 +63,7 @@
 ;; (add-hook 'haskell-ts-mode 'eglot-ensure)
 (add-hook 'nix-mode-hook 'eglot-ensure)
 (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+(add-hook 'jtsx-tsx-mode-hook 'eglot-ensure)
 (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 
 ;;; FLYSPELL
@@ -88,7 +100,7 @@
 ;;   (define-key emmet2-mode-map (kbd "C-c C-.") 'emmet2-expand))  ;; Bind custom expand key
 
 ;; 
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . jtsx-tsx-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.html" . html-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
@@ -104,3 +116,5 @@
 ;; (add-to-list 'auto-mode-alist '("\.rs" . rust-ts-mode))
 ;; (add-to-list 'auto-mode-alist '("\.html" . html-ts-mode))
 ;; (straight-use-package '(evil-ts :type git :host github :repo "foxfriday/evil-ts"))
+(use-package smartparens
+  :config (smartparens-global-mode))
