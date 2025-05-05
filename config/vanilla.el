@@ -1,4 +1,4 @@
-;; BACKUPS
+;; BACKUPS  -*- lexical-binding: t; -*-
 (setq
     backup-directory-alist '(("." . "~/.emacs.d/backup/"))
     auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-saves/" t))

@@ -1,4 +1,4 @@
-;; (use-package lsp-mode
+;; (use-package lsp-mode  -*- lexical-binding: t; -*-
 ;;   :commands lsp
 ;;   :config
 ;;   (add-hook 'nix-mode-hook #'lsp-deferred)

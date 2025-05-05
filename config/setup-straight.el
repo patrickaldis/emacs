@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; INITIALISE STRAIGHT.el
 (setq package-enable-at-startup nil)
 (defvar bootstrap-version)

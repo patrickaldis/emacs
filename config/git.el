@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package magit)
 
 (use-package git-gutter

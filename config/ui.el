@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; FONT
 (setq default-frame-alist '((font . "JetBrainsMono NF 12")))
 
@@ -44,6 +46,7 @@
   (setq catppuccin-flavor 'frappe)
   (catppuccin-reload)
   )
+;; (use-package nano-theme)
 
 ;;; ENABLE NERD ICONS
 (use-package nerd-icons
