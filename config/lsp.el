@@ -47,8 +47,9 @@
 (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs
 		;; '(jtsx-tsx-mode . ("yarn" "exec" "typescript-language-server" "--stdio"))))
-		'(jtsx-tsx-mode . ("yarn" "exec" "tailwindcss-language-server" "--stdio"))))
-		;; '(jtsx-tsx-mode . ("~/lspx" "--lsp" "yarn exec typescript-language-server --stdio" "--lsp" "tailwindcss-language-server --stdio"))))
+		;; '(jtsx-tsx-mode . ("yarn" "exec" "tailwindcss-language-server" "--stdio"))))
+		;; '(jtsx-tsx-mode . ("tailwindcss-language-server" "--stdio"))))
+		'(jtsx-tsx-mode . ("~/lspx" "--lsp" "yarn exec typescript-language-server --stdio" "--lsp" "tailwindcss-language-server --stdio"))))
 (with-eval-after-load 'eglot
   (define-key eglot-mode-map [mouse-1] #'my/eldoc-box-show-doc-at-point))
 
@@ -61,7 +62,6 @@
 (add-hook 'jtsx-tsx-mode-hook 'eglot-ensure)
 (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 (add-hook 'haskell-ts-mode-hook 'eglot-ensure)
-
 ;; (use-package yasnippet)
 ;; (use-package lsp-bridge :after yasnippet
 ;;   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
@@ -77,10 +77,16 @@
 ;; 	  "haskell-language-server --lsp")))
 ;; )
 
+;; (use-package eglot-booster
+;;   :after eglot
+;;   :straight '(eglot-booster :type git :host github :repo "jdtsmith/eglot-booster")
+;;   :config (eglot-booster-mode))
+
 ;;; JTSX
 (use-package jtsx
   :config
-  (setq jtsx-enable-jsx-element-tags-auto-sync t))
+  (setq jtsx-enable-jsx-element-tags-auto-sync t)
+  (put 'jtsx-tsx-mode 'eglot-language-id "javascriptreact"))
 
 
 ;;; FLYSPELL
