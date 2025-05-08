@@ -16,15 +16,15 @@
 ;; (use-package lsp-ivy)
 ;; (use-package lsp-haskell
 ;;   :config (setq lsp-haskell-server-path "haskell-language-server"))
-(defun my/eldoc-box-show-doc-at-point (event)
-  "Show eldoc-box help at point after a short delay to give Eldoc time to update."
-  (interactive "e")
-  (mouse-set-point event)
-  (eldoc-box-reset-frame)
-  (run-with-timer
-   0.2 nil
-   (lambda ()
-     (eldoc-box-help-at-point))))
+;; (defun my/eldoc-box-show-doc-at-point (event)
+;;   "Show eldoc-box help at point after a short delay to give Eldoc time to update."
+;;   (interactive "e")
+;;   (mouse-set-point event)
+;;   (eldoc-box-reset-frame)
+;;   (run-with-timer
+;;    0.2 nil
+;;    (lambda ()
+;;      (eldoc-box-help-at-point))))
 
 
 (defun my/eldoc-box-refresh (event)
@@ -41,30 +41,47 @@
 (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs
 		'(nix-mode . ("nixd"))))
+;; (with-eval-after-load 'eglot
+;;     (add-to-list 'eglot-server-programs
+;; 		'(tsx-ts-mode . ("yarn" "exec" "typescript-language-server" "--stdio"))))
 (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs
-		'(tsx-ts-mode . ("yarn" "exec" "typescript-language-server" "--stdio"))))
-(with-eval-after-load 'eglot
-    (add-to-list 'eglot-server-programs
-		'(jtsx-tsx-mode . ("yarn" "exec" "typescript-language-server" "--stdio"))))
+		;; '(jtsx-tsx-mode . ("yarn" "exec" "typescript-language-server" "--stdio"))))
+		'(jtsx-tsx-mode . ("yarn" "exec" "tailwindcss-language-server" "--stdio"))))
+		;; '(jtsx-tsx-mode . ("~/lspx" "--lsp" "yarn exec typescript-language-server --stdio" "--lsp" "tailwindcss-language-server --stdio"))))
 (with-eval-after-load 'eglot
   (define-key eglot-mode-map [mouse-1] #'my/eldoc-box-show-doc-at-point))
+
+(use-package eldoc-box
+  :custom
+  (eldoc-idle-delay 0.2))
+
+(add-hook 'nix-mode-hook 'eglot-ensure)
+(add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+(add-hook 'jtsx-tsx-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+(add-hook 'haskell-ts-mode-hook 'eglot-ensure)
+
+;; (use-package yasnippet)
+;; (use-package lsp-bridge :after yasnippet
+;;   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
+;;             :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+;;             :build (:not compile))
+;;   :init
+;;   (global-lsp-bridge-mode)
+;; )
+
+;; (setq lsp-bridge-get-single-lang-server-by-extension
+;;       (lambda (file-path)
+;; 	(
+;; 	  "haskell-language-server --lsp")))
+;; )
 
 ;;; JTSX
 (use-package jtsx
   :config
   (setq jtsx-enable-jsx-element-tags-auto-sync t))
 
-
-(use-package eldoc-box
-  :custom
-  (eldoc-idle-delay 0.2))
-;; (add-hook 'haskell-mode-hook 'eglot-ensure)
-;; (add-hook 'haskell-ts-mode 'eglot-ensure)
-(add-hook 'nix-mode-hook 'eglot-ensure)
-(add-hook 'tsx-ts-mode-hook 'eglot-ensure)
-(add-hook 'jtsx-tsx-mode-hook 'eglot-ensure)
-(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 
 ;;; FLYSPELL
 (use-package flyspell-correct
@@ -105,10 +122,10 @@
 (add-to-list 'auto-mode-alist '("\\.html" . html-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-ts-mode))
-(add-hook 'haskell-ts-mode-hook 'eglot-ensure)
 
 ;;; TREESITTER MODES
 (use-package haskell-ts-mode)
+
   ;; :straight (:host github :repo "https://codeberg.org/pranshu/haskell-ts-mode" :commit "cc6d458a3e67b04d30d0d1f2c8d105c1a66e2f01"))
 ;;   :config
 ;;    (add-to-list 'auto-mode-alist '("\.hs" . haskell-ts-mode))

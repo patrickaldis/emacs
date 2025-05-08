@@ -12,7 +12,7 @@
 (use-package corfu :config
   (global-corfu-mode)
   (setq corfu-auto        t
-        corfu-auto-delay  0.2  ;; TOO SMALL - NOT RECOMMENDED!
+        corfu-auto-delay  0.3  ;; TOO SMALL - NOT RECOMMENDED!
         corfu-auto-prefix 1) ;; TOO SMALL - NOT RECOMMENDED!
 
   (add-hook 'corfu-mode-hook
