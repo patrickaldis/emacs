@@ -1,13 +1,8 @@
 ;; -*- lexical-binding: t; -*-
-
-(load "~/.emacs.d/config/setup-straight.el")
-
-(load "~/.emacs.d/config/core.el")
-(load "~/.emacs.d/config/ui.el")
-(load "~/.emacs.d/config/keys.el")
-(load "~/.emacs.d/config/git.el")
-(load "~/.emacs.d/config/lsp.el")
-(load "~/.emacs.d/config/vanilla.el")
+(dolist (file (directory-files-recursively "~/.emacs.d/early" "\\.el\\'"))
+    (load file))
+(dolist (file (directory-files-recursively "~/.emacs.d/config/active" "\\.el\\'"))
+    (load file))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

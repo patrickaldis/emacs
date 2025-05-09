@@ -1,6 +1,4 @@
 ;; -*- lexical-binding: t; -*-
-(use-package magit)
-
 (use-package git-gutter
   :defines git-gutter:update-interval
 

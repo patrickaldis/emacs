@@ -32,11 +32,17 @@
    "a" 'eglot-code-actions
  )
 
+ (defun my/switch-to-config ()
+   "swtiches to config"
+   (interactive)
+   (project-switch-project "~/.emacs.d"))
+
   (global-definer
     "k" 'eldoc-box-help-at-point
     ":" 'execute-extended-command
     "e" 'consult-flymake
-    "s" 'consult-eglot-symbols
+    "c" 'my/switch-to-config
+    "s" 'consult-ripgrep
     "f" 'project-find-file
     "o" 'find-file
     "r" 'eglot-rename
