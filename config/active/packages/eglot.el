@@ -3,8 +3,9 @@
   :config
   (setq my-server-programs
         '((haskell-ts-mode . ("haskell-language-server" "--lsp"))
-          (nix-mode        . ("nixd"))
-          (jtsx-tsx-mode   . ("~/lspx" "--lsp" "yarn exec typescript-language-server --stdio" "--lsp" "yarn exec tailwindcss-language-server --stdio"))))
+          (jtsx-tsx-mode   . ;;("~/lspx" "--lsp" "yarn exec typescript-language-server --stdio" "--lsp" "yarn exec tailwindcss-language-server --stdio"))
+                             ("yarn" "exec" "typescript-language-server" "--stdio"))
+          (nix-mode        . ("nixd"))))
   (setq eglot-server-programs
         (append my-server-programs eglot-server-programs))
   (dolist (progs my-server-programs)
